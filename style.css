@@ -1,0 +1,40 @@
+@font-face {
+    font-family: "Prompt";
+    src: url("font/Prompt-Regular.ttf") format("truetype");
+}
+
+*{
+    font-family: "Prompt";
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url("img/bg.png");
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+.button{
+    display: inline-block;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: .5rem .9rem;
+    margin: .1rem;
+    background-color: #D4E9FF;
+    color: #074075;
+    transition: all .3s;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.button:hover{
+    background-color: #aad1fc;
+    transform: scale(1.05);
+}
+
+.button:active{
+    transform: scale(.95);
+}
