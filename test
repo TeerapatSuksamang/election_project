@@ -1,0 +1,57 @@
+รูป
+ชื่อ
+เบอร์
+คะแนน
+
+เมนู
+
+database
+
+db_student
+std_name vachar(255) (personal information)
+std_code vachar(255) (for login)
+id_card vachar(255) (for login)
+vote int default(null) (keep id candidate)
+status int default(0) (0=student, 1=candidate)
+
+login.php (Use std_code and id_card for login to website (if student status is 1, will can not logged in))
+
+index.php (show real-time hight score of candidate information) have menu {
+    vote -> vote.php (check login session if true will show all candidate but not will go to login.php) have menu {
+        back (go back to index.php)
+        vote -> vote_db.php (insert candidate id to student table when student choose and click vote) 
+                (when process is success will back to vote.php and show candidate that student vote)
+    }
+
+    profile -> profile.php (show information of currently active student (std_name, std_code, vote_status,)) have menu {
+        back -> (go back to index.php)
+        logout -> (unset student session and return to index.php)
+    }
+
+    scoreboard (tap to scroll from bottom of screen like comment section from tiktok or reels something like that)
+}
+
+
+db_candidate
+candidate_number int pk auto
+std_name vachar(255)
+std_code vachar(255)
+std_img varchar(255)
+slogan varchar(255)
+point int  
+
+
+db_admin
+username varchar(255)
+password varchar(255)
+date_start date
+time_start time
+date_end date
+time_end time
+
+ตอนที่ admin เพิ่ม candidate ใส่ std_code แล้วดึงชื่อนักเรียนเพื่อมาให้เช็คชื่อความถูกต้องเพื่อยืนยันอีกครั้ง เมื่อกดยืนยันจะให้เพิ่มรูปภาพ และคำขวัญ
+และเมื่อกดเพิ่ม candidate จะไป UPDATE `student` SET `status` = 1 WHERE `std_code` = 'นักเรียนที่ถูกเพิ่ม'
+
+ส่วนของ admin ให้สามารถลบรุ่นของนักเรียน และ import นักเรียนรุ่นใหม่ได้
+
+login

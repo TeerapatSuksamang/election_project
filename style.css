@@ -6,23 +6,33 @@
 @font-face {
     font-family: "Prompt-black";
     src: url("font/Prompt-Black.ttf") format("truetype");
-} 
+}
 
-:root{
+@font-face {
+    font-family: "Noto";
+    src: url("font_2/NotoSansThai-VariableFont_wdth\,wght.ttf") format("truetype");
+    /* src: url("font_3/Anuphan-VariableFont_wght.ttf") format("truetype"); */
+}
+
+:root {
     --first: #e7f3ff;
     --seccon: #1378aa;
     --third: #3f99ea;
     --fourth: #074075;
+    --diferent: #ec73ab;
+    --btn: #D4E9FF;
+    --btn-hover: #aad1fc;
+    --btn-dis: #80c0fc;
 }
 
-*{
+* {
     font-family: "Prompt-Regular";
     padding: 0;
     margin: 0;
     box-sizing: border-box !important;
 }
 
-body{ 
+.home-bg {
     background-image: url("img/bg.png");
     background-attachment: fixed;
     background-position: center center;
@@ -33,74 +43,124 @@ body{
     box-sizing: border-box;
 }
 
-.button{
+.button {
     display: inline-block;
-    border: 2px solid white;
     border-radius: 5px;
     padding: .5rem .9rem;
     margin: .1rem;
-    background-color: #D4E9FF;
-    color: #074075;
+    border: 2px solid white;
+    background-color: var(--btn);
+    color: var(--fourth);
     transition: all .3s;
     font-size: 1.2rem;
     text-decoration: none;
 }
 
-.button:hover{
-    background-color: #aad1fc;
+.button:hover {
+    background-color: var(--btn-hover);
     transform: scale(1.05);
 }
 
-.button:active{
+.button:active {
     transform: scale(.95);
 }
- 
+
+.button[disabled]{
+    background-color: var(--btn-dis);
+    color: whitesmoke;
+    pointer-events: none;
+}
+
 /* ---------------------- */
-.candidate-content{
+.candidate-content {
     height: 100%;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.candidate{
+.candidate {
     /* border: 1px solid black ; */
     /* position: absolute; */
-    width: 80%;
+    width: 100%;
+    max-width: 25rem;
+    height: 100%;
+
+    overflow-x: visible;
 }
 
-.number *{ 
-    font-family: "Prompt-Black";
-    font-size: 3.5rem;
-    font-weight: bolder;
+.number {
+    position: absolute;
+    z-index: -1;
+}
+
+.number * {
+    font-family: "Noto";
+    font-size: 5.5rem;
+    font-weight: 900;
     -webkit-text-stroke: 2px white;
 }
 
-.number :nth-child(1){
+.number :nth-child(1) {
     color: var(--first);
 }
-.number :nth-child(2){
+
+.number :nth-child(2) {
     color: var(--third);
 }
-.number :nth-child(3){
+
+.number :nth-child(3) {
     color: var(--fourth);
 }
 
-/* ------------------ */ 
+.img-box {
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.img-box img {
+    /* width: 80%; */
+    height: 70%;
+    position: absolute;
+    object-fit: cover;
+    object-position: center bottom;
+    overflow: visible;
+    transform: translateX(10px);
+    /* border: 1px solid red; */
+}
+
+.description{
+    width: 100%;
+    height: 10rem;
+    position: absolute;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9) , transparent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* ------------------ */
 
 .score-details {
     position: fixed;
-    bottom: -52vh; /* ซ่อนโดยเริ่มต้น */
+    /* ซ่อนโดยเริ่มต้น */
+    bottom: -52vh; 
+    /* bottom: 0; */
     left: 0;
     width: 100%;
     height: 60vh;
-    overflow-y: auto;
+    overflow-y: none;
     transition: bottom 0.3s;
     background-color: #d4e9ff !important;
-    border-radius: 15px 15px 0 0;
-    z-index: 9;
+    border-radius: 10px 10px 0 0;
+    z-index: 1;
 
-    display: flex; 
+    display: flex;
     flex-direction: column;
 }
 
@@ -110,21 +170,52 @@ body{
     font-weight: bold;
     cursor: pointer;
     border-bottom: 2px solid white;
+    border-radius: 10px 10px 0 0;
 }
 
-.scroll{
-    overflow-y: scroll;
+.scroll {
+    overflow-y: auto;
 }
 
-.list-group{ 
+.scroll::-webkit-scrollbar{
+    width: 4px;
+}
+.scroll::-webkit-scrollbar-track { 
+    background-color: var(--first);
+}
+.scroll::-webkit-scrollbar-thumb {
+    background: var(--third); 
+    border-radius: 10px;
+} 
+.scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--fourth); 
+}
+
+.list-group {
     min-height: max-content;
-    overflow-y: scroll;
 }
 
 .list-group-item {
     background-color: #d4e9ff;
     border: none;
     color: #000000;
+}
+.candidate-profile {
+    display: inline-block;
+    width: 3.1rem;
+    aspect-ratio: 1/1;
+    /* height: 3rem; */
+    border-radius: 50%;
+    border: 1px solid var(--diferent);
+    background-color: var(--first);
+    overflow: hidden;
+}
+
+.img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
 }
 
 /* สไตล์ overlay */
@@ -134,15 +225,184 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* สีดำโปร่งใส */
+    background: rgba(0, 0, 0, 0.5);
+    /* สีดำโปร่งใส */
     z-index: 1;
-    opacity: 0; /* ตั้งค่าเริ่มต้นให้โปร่งใส */
-    transition: opacity 0.3s ; /* เพิ่ม transition */
-    pointer-events: none; /* ห้ามกดเมื่อปิด */
+    opacity: 0;
+    /* ตั้งค่าเริ่มต้นให้โปร่งใส */
+    transition: opacity 0.3s;
+    /* เพิ่ม transition */
+    pointer-events: none;
+    /* ห้ามกดเมื่อปิด */
 }
 
 /* เมื่อเปิด overlay */
 #overlay.active {
-    opacity: 1; /* เปลี่ยนให้ไม่โปร่งใส */
-    pointer-events: all; /* ให้กดได้ */
+    opacity: 1;
+    /* เปลี่ยนให้ไม่โปร่งใส */
+    pointer-events: all;
+    /* ให้กดได้ */
+}
+
+
+/* -------------- Login -------------- */
+.login-bg{
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    background-color: var(--fourth);
+}
+
+.overlay-1{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) , rgba(255, 255, 255, 0.5));
+    backdrop-filter: blur(15px);
+    z-index: -1;
+}
+
+.overlay-2{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) , rgba(255, 255, 255, 0.5)); */
+    background: rgba(0, 0, 0, .4);
+    backdrop-filter: blur(25px);
+    z-index: -1;
+}
+
+.login-bg-img{
+    position: absolute;
+    width: 15rem;
+    top: 1rem;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: -2;
+}
+
+.form-login{
+    margin: 4rem 0 0 0;
+}
+
+.form-login input{
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: var(--first);
+    width: 100% !important;
+}
+
+.form-login input:focus{
+    background-color: var(--first);
+}   
+
+label::after {
+    background-color: transparent !important;
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+.btn-submit{
+    all: unset; 
+    width: 100%;
+    background-color: var(--third);
+    color: white;
+    box-shadow: 4px 5px var(--seccon);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    transition: all .5s;
+}
+
+.btn-submit:hover{
+    transform: scale(1.01);
+    box-shadow: 7px 8px var(--seccon);
+}
+
+.btn-submit:active{
+    transform: scale(0.99);
+    box-shadow: 3px 4px var(--seccon);
+} 
+
+.btn-logout{
+    all: unset; 
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    display: block;
+    border: 2px solid var(--first);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    transition: all .5s;
+    cursor: pointer;
+    bottom: 3rem;
+    margin-top: 5rem;
+}
+
+.btn-icon{
+    font-size: 1.7rem;
+}
+
+/* ----------------------------- */
+.vote-bg{
+    background: var(--btn);
+}
+
+.vote-bg hr{
+    border: 2px solid var(--fourth);
+}
+
+.vote-box{
+    display: block;
+    text-decoration: none;
+    color: white;
+    aspect-ratio: 1/1;
+    background: var(--seccon);
+    border-radius: 10px;
+    /* border: 1px solid red; */
+    position: relative;
+}
+
+/* .vote-box *{
+    border: .5px solid pink;
+} */
+
+.vote-number{
+    position: absolute;
+    font-family: "Noto";
+    top: -40px;
+    left: 10px;
+    color: #ffffff81;
+    -webkit-text-stroke: 4px white;
+    font-size: 9rem !important;
+    font-weight: bold;
+}
+
+.vote-img{
+    /* border: 1px solid red; */
+    height: 100% !important;
+    width: 100%;
+    
+    overflow: visible;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    /* bottom: -10px; */
+}
+
+.vote-img .img{
+    /* z-index: 10 !important; */
+    height: 120%;
+    width: 90%;
+    object-fit: cover;
+    object-position: top;
+    /* transform: translateY(-10px); */
 }
